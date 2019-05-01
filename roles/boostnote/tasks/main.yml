@@ -1,0 +1,5 @@
+---
+
+- name: "install boostnote"
+  apt:
+    deb: "{{ boostnote_download_url }}"
