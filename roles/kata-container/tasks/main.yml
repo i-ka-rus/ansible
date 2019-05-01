@@ -2,24 +2,24 @@
 
 - name: "install kata container repo key"
   apt_key:
-    url: "http://download.opensuse.org/repositories/home:/katacontainers:/releases:/x86_64:/master/xUbuntu_18.04/Release.key"
+    url: "{{ kata_key }}"
     state: present
 
 - name: "add kata container repo"
   apt_repository:
-    repo: "deb http://download.opensuse.org/repositories/home:/katacontainers:/releases:/x86_64:/master/xUbuntu_18.04/ /"
+    repo: "{{ kata_repo }}"
     state: present
     filename: kata-containers.list
 
 - name: "install kata container packages"
   apt:
-    name: kata-runtime,kata-proxy,kata-shim
+    name: "{{ kata_pkgs }}"
     state: present
     update_cache: yes
 
 - name: "check if docker is installed"
   stat:
-    path: "/usr/bin/docker"
+    path: "{{ docker_path }}"
   register: docker
 
 - name: "create system.d dir for docker"
