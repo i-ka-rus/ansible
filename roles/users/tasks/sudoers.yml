@@ -1,0 +1,17 @@
+---
+
+- name: "deploy sudoers config"
+  template:
+    src: "{{ item.value.template | default(sudoers_default_template) }}"
+    dest: "/etc/sudoers.d/{{ item.key }}"
+    owner: root
+    group: root
+    mode: 0440
+  with_dict: "{{ sudoers_conf }}"
+
+- name: "remove sudoers config"
+  file:
+    path: "/etc/sudoers.d/{{ item }}"
+    state: absent
+  loop: "{{ remove_sudoers_conf|flatten(levels=1) }}"
+  when: remove_sudoers_conf is defined

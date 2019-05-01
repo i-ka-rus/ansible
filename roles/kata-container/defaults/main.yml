@@ -1,0 +1,9 @@
+---
+
+kata_repo: "deb http://download.opensuse.org/repositories/home:/katacontainers:/releases:/x86_64:/master/xUbuntu_18.04/ /"
+kata_key: "http://download.opensuse.org/repositories/home:/katacontainers:/releases:/x86_64:/master/xUbuntu_18.04/Release.key"
+kata_pkgs:
+  - kata-runtime
+  - kata-proxy
+  - kata-shim
+docker_path: "/usr/bin/docker"

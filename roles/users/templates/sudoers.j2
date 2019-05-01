@@ -1,0 +1,9 @@
+#{{ ansible_managed }}
+
+{% for i in item.value %}
+{% if i.find('\n') != -1 %}
+{{i.replace("\n","\n   ")}}
+{% else %}
+{% if i != "" %}{{ i.replace(";",";\n      ").replace('"','') }}
+{% endif %}{% endif %}
+{% endfor %}

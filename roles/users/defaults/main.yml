@@ -1,0 +1,8 @@
+---
+
+users: []
+
+sudoers_default_template: sudoers.j2
+sudoers_conf: []
+
+remove_sudoers_conf: []

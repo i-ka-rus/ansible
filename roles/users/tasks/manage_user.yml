@@ -1,0 +1,44 @@
+---
+
+- name: "create list of all users"
+  set_fact:
+    users: "{{ users }}"
+
+- name: "create specific user groups"
+  group:
+    name: "{{ item.name }}"
+    state: present
+    gid: "{{ item.gid | default(omit) }}"
+  loop: "{{ users|flatten(levels=1) }}"
+
+- name: "create department specific groups"
+  group:
+    name: "{{ item.1 }}"
+    state: "{{ item.0.state | default(present) }}"
+    gid: "{{ item.gid | default(omit) }}"
+  loop: "{{ users | subelements('groups', skip_missing=True) }}"
+
+- name: "create and configure Users or remove them"
+  user:
+    name: "{{ item.name }}"
+    comment: "{{ item.comment }}"
+    password: "{{ item.password | default(omit) }}"
+    group: "{{ item.group | default(item.name) }}"
+    groups: "{{ item.groups | default(omit) }}"
+    uid: "{{ item.uid | default(omit) }}"
+    state:  "{{ item.state | default('present') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    create_home: "{{ item.createhome | default(omit) }}"
+    update_password: "{{ item.update_password | default('always') }}"
+    append: yes
+    remove: "{{ item.remove | default(yes) }}"
+  loop: "{{ users|flatten(levels=1) }}"
+
+- name: "Add public keys to authorized_hosts"
+  authorized_key:
+    user: "{{ item.0.name }}"
+    state: "{{ item.0.state }}"
+    key: "{{ item.1 }}"
+  ignore_errors: True
+  loop: "{{ users | subelements('publickeys', skip_missing=True) }}"
+  when: item.0.state == "present"

@@ -1,0 +1,5 @@
+---
+
+enpass_key: "https://apt.enpass.io/keys/enpass-linux.key"
+enpass_repo: "deb https://apt.enpass.io/ stable main"
+enpass_pkgs: "enpass"

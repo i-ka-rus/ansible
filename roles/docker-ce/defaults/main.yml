@@ -1,0 +1,13 @@
+---
+
+
+required_pkgs:
+  - apt-transport-https 
+  - ca-certificates 
+  - curl 
+  - software-properties-common
+
+docker_version: docker-ce
+docker_repo_key: "https://download.docker.com/linux/ubuntu/gpg"
+docker_repo_key_id: "0EBFCD88"
+docker_repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
