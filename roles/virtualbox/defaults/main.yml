@@ -1,0 +1,5 @@
+---
+
+vrtualbox_key: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+virtualbox_repo: "deb https://download.virtualbox.org/virtualbox/debian bionic contrib"
+virtualbox_version: "virtualbox-6.0"

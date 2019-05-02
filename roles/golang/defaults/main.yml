@@ -1,0 +1,6 @@
+---
+
+golang_pkg: "https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz"
+path: "/usr/local"
+gopath: "GOPATH=$HOME/work"
+env_file: "$HOME/.bashrc"

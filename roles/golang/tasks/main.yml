@@ -1,0 +1,30 @@
+---
+
+- name: "check if golang is installed in /usr/local/"
+  stat:
+    path: "{{ path }}/go"
+  register: go
+
+- name: "install golang if not installed in /usr/local"
+  unarchive:
+    src: "{{ golang_pkg }}"
+    dest: "{{ path }}"
+    remote_src: yes
+  when: not go.stat.exists
+
+- name: "add gopath to .bashrc"
+  lineinfile:
+    path: "{{ env_file }}"
+    state: present
+    line: "export {{ gopath }}"
+
+- name: "add go/bin to .bashrc"
+  lineinfile:
+    path: "{{ env_file }}"
+    state: present
+    line: "export PATH=$PATH:{{ path }}/go/bin:$GOPATH/bin"
+
+- name: "source $HOME/.bashrc"
+  shell: source "{{ env_file }}"
+  args:
+    executable: /bin/bash

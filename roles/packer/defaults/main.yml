@@ -1,0 +1,4 @@
+---
+
+packer_pkg: "https://releases.hashicorp.com/packer/1.4.0/packer_1.4.0_linux_amd64.zip"
+path: "/usr/local/bin"

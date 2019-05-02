@@ -1,0 +1,5 @@
+---
+
+- name: "install vagrant on debian and ubuntu"
+  apt:
+    deb: "{{ vagrant_pkg }}"

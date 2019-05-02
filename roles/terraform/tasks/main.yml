@@ -1,0 +1,7 @@
+---
+
+- name: "install terraform"
+  unarchive:
+    src: "{{ terraform_pkg }}"
+    dest: "{{ path }}"
+    remote_src: yes

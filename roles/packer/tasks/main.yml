@@ -1,0 +1,7 @@
+---
+
+- name: "install packer"
+  unarchive:
+    src: "{{ packer_pkg }}"
+    dest: "{{ path }}"
+    remote_src: yes
