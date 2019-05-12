@@ -1,0 +1,13 @@
+---
+
+- name: "install atom on deb based systems"
+  apt:
+    deb: "{{ atom_url_deb }}"
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: "install atom on rpm based systems"
+  yum:
+    name: "{{ atom_url_rpm }}"
+  when: ansible_facts['os_family'] == "RedHat"
+
+  
